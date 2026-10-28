@@ -1,0 +1,5234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+PYXIS — Real-Time Malware & Threat Detection
+</title>
+
+
+<style>
+
+/* =====================================================
+   ROOT
+===================================================== */
+
+:root{
+
+  --bg:#05070d;
+
+  --panel:#0b101b;
+
+  --panel2:#101827;
+
+  --line:#1c2940;
+
+  --text:#eef5ff;
+
+  --muted:#91a0b8;
+
+  --cyan:#45e6ff;
+
+  --blue:#5b7cff;
+
+  --green:#43e59b;
+
+  --yellow:#ffd166;
+
+  --red:#ff5c7a;
+
+  --shadow:0 18px 60px #0008;
+
+}
+
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+*{
+
+  box-sizing:border-box;
+
+  scroll-behavior:smooth;
+
+}
+
+
+body{
+
+  margin:0;
+
+  background:
+    radial-gradient(
+      circle at 80% 0%,
+      #10234a 0,
+      #05070d 38%
+    ),
+    var(--bg);
+
+  color:var(--text);
+
+  font-family:
+    Inter,
+    Segoe UI,
+    Arial,
+    sans-serif;
+
+  line-height:1.6;
+
+}
+
+
+a{
+
+  color:inherit;
+
+  text-decoration:none;
+
+}
+
+
+.container{
+
+  width:min(1180px,92%);
+
+  margin:auto;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+nav{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:20;
+
+  background:#05070ddd;
+
+  backdrop-filter:blur(16px);
+
+  border-bottom:1px solid #ffffff10;
+
+}
+
+
+.navin{
+
+  height:70px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+}
+
+
+.logo{
+
+  font-weight:900;
+
+  letter-spacing:.22em;
+
+  font-size:20px;
+
+  color:var(--cyan);
+
+}
+
+
+.logo span{
+
+  color:#fff;
+
+}
+
+
+.links{
+
+  display:flex;
+
+  gap:24px;
+
+  color:var(--muted);
+
+  font-size:14px;
+
+}
+
+
+.links a:hover{
+
+  color:var(--cyan);
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+  min-height:calc(100vh - 70px);
+
+  display:grid;
+
+  place-items:center;
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+
+.gridbg{
+
+  position:absolute;
+
+  inset:0;
+
+  background-image:
+
+    linear-gradient(
+      #45e6ff08 1px,
+      transparent 1px
+    ),
+
+    linear-gradient(
+      90deg,
+      #45e6ff08 1px,
+      transparent 1px
+    );
+
+  background-size:50px 50px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      #000,
+      transparent
+    );
+
+}
+
+
+.hero-content{
+
+  position:relative;
+
+  text-align:center;
+
+  max-width:900px;
+
+  padding:70px 0;
+
+}
+
+
+.badge{
+
+  display:inline-block;
+
+  border:1px solid #45e6ff44;
+
+  color:var(--cyan);
+
+  background:#45e6ff0b;
+
+  border-radius:999px;
+
+  padding:7px 14px;
+
+  font-size:12px;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+h1{
+
+  font-size:clamp(
+    50px,
+    9vw,
+    105px
+  );
+
+  line-height:.9;
+
+  margin:25px 0 20px;
+
+  letter-spacing:-.06em;
+
+}
+
+
+.gradient{
+
+  background:
+    linear-gradient(
+      100deg,
+      #fff,
+      var(--cyan),
+      #7189ff
+    );
+
+  -webkit-background-clip:text;
+
+  color:transparent;
+
+}
+
+
+.hero p{
+
+  font-size:19px;
+
+  color:var(--muted);
+
+  max-width:720px;
+
+  margin:
+    0 auto 32px;
+
+}
+
+
+.btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  padding:12px 18px;
+
+  border-radius:10px;
+
+  border:1px solid #ffffff1a;
+
+  background:#ffffff08;
+
+  margin:5px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  color:var(--text);
+
+  transition:.2s;
+
+}
+
+
+.btn.primary{
+
+  background:var(--cyan);
+
+  color:#031018;
+
+  border-color:var(--cyan);
+
+}
+
+
+.btn:hover{
+
+  transform:translateY(-2px);
+
+}
+
+
+.btn.google{
+
+  background:#ffffff08;
+
+  border-color:#4285f455;
+
+}
+
+
+.btn.google:hover{
+
+  border-color:#4285f4;
+
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+section{
+
+  padding:90px 0;
+
+}
+
+
+.section-head{
+
+  margin-bottom:38px;
+
+}
+
+
+.eyebrow{
+
+  color:var(--cyan);
+
+  font-size:12px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.18em;
+
+  font-weight:800;
+
+}
+
+
+.section-head h2{
+
+  font-size:42px;
+
+  line-height:1.1;
+
+  margin:8px 0;
+
+}
+
+
+.section-head p{
+
+  color:var(--muted);
+
+  max-width:720px;
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
+
+}
+
+
+.card{
+
+  background:
+    linear-gradient(
+      145deg,
+      #0e1522,
+      #090d16
+    );
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  padding:25px;
+
+  box-shadow:var(--shadow);
+
+}
+
+
+.card h3{
+
+  margin:8px 0;
+
+}
+
+
+.card p{
+
+  color:var(--muted);
+
+  font-size:14px;
+
+}
+
+
+.icon{
+
+  font-size:28px;
+
+}
+
+
+.tag{
+
+  display:inline-block;
+
+  font-size:11px;
+
+  padding:4px 8px;
+
+  border:1px solid #ffffff14;
+
+  border-radius:6px;
+
+  color:var(--muted);
+
+  margin:3px;
+
+}
+
+
+/* =====================================================
+   ARCHITECTURE
+===================================================== */
+
+.arch{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:12px;
+
+  align-items:stretch;
+
+}
+
+
+.layer{
+
+  padding:28px;
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  background:var(--panel);
+
+  position:relative;
+
+  cursor:pointer;
+
+  transition:.2s;
+
+}
+
+
+.layer.active{
+
+  border-color:var(--cyan);
+
+  box-shadow:
+    0 0 30px #45e6ff18;
+
+}
+
+
+.num{
+
+  font-size:12px;
+
+  color:var(--cyan);
+
+}
+
+
+/* =====================================================
+   DETECTOR
+===================================================== */
+
+.detector{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:25px;
+
+}
+
+
+.inputbox{
+
+  width:100%;
+
+  background:#050912;
+
+  border:1px solid var(--line);
+
+  color:#fff;
+
+  border-radius:12px;
+
+  padding:14px;
+
+  font:inherit;
+
+  min-height:180px;
+
+  resize:vertical;
+
+  outline:none;
+
+}
+
+
+.inputbox:focus{
+
+  border-color:var(--cyan);
+
+  box-shadow:
+    0 0 20px #45e6ff12;
+
+}
+
+
+.result{
+
+  min-height:180px;
+
+  border:1px solid var(--line);
+
+  border-radius:12px;
+
+  padding:20px;
+
+  background:#070c14;
+
+}
+
+
+.status{
+
+  font-size:25px;
+
+  font-weight:900;
+
+}
+
+
+.safe{
+
+  color:var(--green);
+
+}
+
+
+.suspicious{
+
+  color:var(--yellow);
+
+}
+
+
+.malicious{
+
+  color:var(--red);
+
+}
+
+
+/* =====================================================
+   EXAMPLE PANEL
+===================================================== */
+
+.example-info{
+
+  margin-top:15px;
+
+  padding:14px 16px;
+
+  border:1px solid #45e6ff25;
+
+  border-radius:12px;
+
+  background:#45e6ff06;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+}
+
+
+.example-info strong{
+
+  color:var(--cyan);
+
+}
+
+
+.example-counter{
+
+  display:inline-block;
+
+  margin-left:8px;
+
+  color:var(--yellow);
+
+}
+
+
+/* =====================================================
+   FILE SCANNER
+===================================================== */
+
+.file-scanner{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:25px;
+
+}
+
+
+.file-panel{
+
+  background:
+    linear-gradient(
+      145deg,
+      #0e1522,
+      #090d16
+    );
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  padding:25px;
+
+  box-shadow:var(--shadow);
+
+}
+
+
+.file-drop{
+
+  min-height:230px;
+
+  border:2px dashed #45e6ff33;
+
+  border-radius:16px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:30px;
+
+  background:#45e6ff04;
+
+  transition:.2s;
+
+}
+
+
+.file-drop:hover{
+
+  border-color:var(--cyan);
+
+  background:#45e6ff08;
+
+}
+
+
+.file-drop.dragging{
+
+  border-color:var(--cyan);
+
+  background:#45e6ff10;
+
+  box-shadow:
+    0 0 30px #45e6ff15;
+
+}
+
+
+.file-icon{
+
+  font-size:55px;
+
+  margin-bottom:10px;
+
+}
+
+
+.file-name{
+
+  color:var(--cyan);
+
+  font-weight:800;
+
+  word-break:break-word;
+
+}
+
+
+.file-meta{
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin-top:5px;
+
+}
+
+
+.file-example-info{
+
+  margin-top:15px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  border:1px solid #45e6ff25;
+
+  background:#45e6ff05;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+}
+
+
+.file-example-counter{
+
+  color:var(--yellow);
+
+}
+
+
+.file-result{
+
+  min-height:300px;
+
+}
+
+
+.file-verdict{
+
+  font-size:30px;
+
+  font-weight:900;
+
+  margin-bottom:5px;
+
+}
+
+
+.file-legit{
+
+  color:var(--green);
+
+}
+
+
+.file-suspicious{
+
+  color:var(--yellow);
+
+}
+
+
+.file-danger{
+
+  color:var(--red);
+
+}
+
+
+.file-score{
+
+  margin:20px 0;
+
+}
+
+
+.score-bar{
+
+  height:14px;
+
+  background:#182238;
+
+  border-radius:999px;
+
+  overflow:hidden;
+
+}
+
+
+.score-fill{
+
+  height:100%;
+
+  border-radius:999px;
+
+  transition:.5s;
+
+}
+
+
+.score-green{
+
+  background:
+    linear-gradient(
+      90deg,
+      #43e59b,
+      #27c98a
+    );
+
+}
+
+
+.score-yellow{
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffd166,
+      #ffad33
+    );
+
+}
+
+
+.score-red{
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff5c7a,
+      #ff315c
+    );
+
+}
+
+
+.file-advice{
+
+  margin-top:15px;
+
+  padding:16px;
+
+  border-radius:12px;
+
+  background:#43e59b08;
+
+  border:1px solid #43e59b33;
+
+}
+
+
+.file-advice strong{
+
+  color:var(--green);
+
+}
+
+
+.file-warning{
+
+  margin-top:15px;
+
+  padding:16px;
+
+  border-radius:12px;
+
+  background:#ff5c7a08;
+
+  border:1px solid #ff5c7a44;
+
+}
+
+
+.file-warning strong{
+
+  color:var(--red);
+
+}
+
+
+.google-info{
+
+  margin-top:15px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:#4285f408;
+
+  border:1px solid #4285f433;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+}
+
+
+/* =====================================================
+   SCAM RESULT
+===================================================== */
+
+.scam-result{
+
+  margin-top:18px;
+
+  padding:18px;
+
+  border:1px solid #ff5c7a44;
+
+  background:#ff5c7a08;
+
+  border-radius:14px;
+
+}
+
+
+.scam-result h3{
+
+  margin-top:0;
+
+  color:var(--red);
+
+}
+
+
+.scam-type{
+
+  color:var(--cyan);
+
+  font-size:18px;
+
+  font-weight:800;
+
+  margin-bottom:10px;
+
+}
+
+
+.advice-box{
+
+  margin-top:15px;
+
+  padding:15px;
+
+  border-radius:10px;
+
+  background:#43e59b08;
+
+  border:1px solid #43e59b33;
+
+}
+
+
+.advice-box strong{
+
+  color:var(--green);
+
+}
+
+
+.warning-box{
+
+  margin-top:15px;
+
+  padding:15px;
+
+  border-radius:10px;
+
+  background:#ffd16608;
+
+  border:1px solid #ffd16633;
+
+}
+
+
+.warning-box strong{
+
+  color:var(--yellow);
+
+}
+
+
+/* =====================================================
+   RESULTS
+===================================================== */
+
+.barrow{
+
+  display:grid;
+
+  grid-template-columns:
+    130px 1fr 55px;
+
+  gap:12px;
+
+  align-items:center;
+
+  margin:17px 0;
+
+}
+
+
+.bar{
+
+  height:13px;
+
+  background:#182238;
+
+  border-radius:99px;
+
+  overflow:hidden;
+
+}
+
+
+.fill{
+
+  height:100%;
+
+  border-radius:99px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      var(--blue)
+    );
+
+}
+
+
+.stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
+
+  margin-bottom:28px;
+
+}
+
+
+.stat{
+
+  padding:24px;
+
+  border:1px solid var(--line);
+
+  border-radius:16px;
+
+  background:var(--panel);
+
+  text-align:center;
+
+}
+
+
+.stat strong{
+
+  font-size:40px;
+
+  display:block;
+
+  color:var(--cyan);
+
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.timeline{
+
+  display:grid;
+
+  gap:12px;
+
+}
+
+
+.item{
+
+  display:grid;
+
+  grid-template-columns:
+    100px 1fr;
+
+  gap:20px;
+
+  padding:18px;
+
+  border-left:2px solid var(--cyan);
+
+  background:#ffffff03;
+
+}
+
+
+.item b{
+
+  color:var(--cyan);
+
+}
+
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+details{
+
+  border:1px solid var(--line);
+
+  border-radius:12px;
+
+  padding:16px 18px;
+
+  background:var(--panel);
+
+  margin:10px 0;
+
+}
+
+
+summary{
+
+  cursor:pointer;
+
+  font-weight:700;
+
+}
+
+
+details p{
+
+  color:var(--muted);
+
+}
+
+
+/* =====================================================
+   PRICING
+===================================================== */
+
+.pricing-card{
+
+  max-width:850px;
+
+  margin:auto;
+
+  padding:35px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0e1522,
+      #090d16
+    );
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+
+}
+
+
+.pricing-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:30px;
+
+  align-items:center;
+
+}
+
+
+.price{
+
+  font-size:48px;
+
+  font-weight:900;
+
+  color:var(--cyan);
+
+  line-height:1;
+
+}
+
+
+.price-label{
+
+  color:var(--muted);
+
+  font-size:14px;
+
+  margin-top:8px;
+
+}
+
+
+.trial{
+
+  padding:20px;
+
+  border:1px solid #43e59b44;
+
+  background:#43e59b08;
+
+  border-radius:14px;
+
+}
+
+
+.trial h3{
+
+  color:var(--green);
+
+  margin-top:0;
+
+}
+
+
+.trial p{
+
+  color:var(--muted);
+
+  font-size:14px;
+
+}
+
+
+.benefits{
+
+  margin:20px 0 0;
+
+  padding:0;
+
+  list-style:none;
+
+}
+
+
+.benefits li{
+
+  color:var(--muted);
+
+  margin:10px 0;
+
+}
+
+
+.benefits li::before{
+
+  content:"✓";
+
+  color:var(--green);
+
+  font-weight:bold;
+
+  margin-right:10px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+  padding:45px 0;
+
+  border-top:1px solid var(--line);
+
+  color:var(--muted);
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+
+  position:fixed;
+
+  right:20px;
+
+  bottom:20px;
+
+  padding:14px 18px;
+
+  background:#101a2b;
+
+  border:1px solid #45e6ff55;
+
+  border-radius:12px;
+
+  opacity:0;
+
+  transform:translateY(15px);
+
+  transition:.3s;
+
+  z-index:30;
+
+}
+
+
+.toast.show{
+
+  opacity:1;
+
+  transform:none;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:800px){
+
+  .links{
+
+    display:none;
+
+  }
+
+
+  .cards,
+  .arch,
+  .detector,
+  .stats,
+  .pricing-grid,
+  .file-scanner{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .hero{
+
+    text-align:left;
+
+  }
+
+
+  .hero p{
+
+    margin-left:0;
+
+  }
+
+
+  .item{
+
+    grid-template-columns:
+      70px 1fr;
+
+  }
+
+
+  .section-head h2{
+
+    font-size:34px;
+
+  }
+
+
+  .barrow{
+
+    grid-template-columns:
+      100px 1fr 45px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav>
+
+<div class="container navin">
+
+<div class="logo">
+PYXIS<span>.</span>
+</div>
+
+
+<div class="links">
+
+<a href="#about">
+About
+</a>
+
+<a href="#architecture">
+Architecture
+</a>
+
+<a href="#detect">
+Demo
+</a>
+
+<a href="#files">
+File Scanner
+</a>
+
+<a href="#results">
+Results
+</a>
+
+<a href="#pricing">
+Pricing
+</a>
+
+<a href="#research">
+Research
+</a>
+
+<a href="#safety">
+Safety
+</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header class="hero">
+
+<div class="gridbg"></div>
+
+
+<div class="container hero-content">
+
+<div class="badge">
+
+Real-Time Malware & Threat Detection
+
+</div>
+
+
+<h1>
+
+<span class="gradient">
+PYXIS
+</span>
+
+</h1>
+
+
+<p>
+
+A hybrid cybersecurity system that combines rule-based
+heuristics with machine learning to identify suspicious
+links, scripts, applications and scam messages.
+
+</p>
+
+
+<a
+  class="btn primary"
+  href="#detect"
+>
+
+Try the interactive demo →
+
+</a>
+
+
+<a
+  class="btn"
+  href="#architecture"
+>
+
+Explore the system
+
+</a>
+
+</div>
+
+</header>
+
+
+<main>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section id="about">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+01 / The problem
+</div>
+
+
+<h2>
+
+Why traditional antivirus can miss new threats.
+
+</h2>
+
+
+<p>
+
+Signature-based detection is effective when a threat has already
+been identified, but attackers can modify links, scripts,
+applications and messages to evade exact pattern matches.
+
+</p>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="icon">
+◈
+</div>
+
+<h3>
+Signature Blind Spot
+</h3>
+
+<p>
+
+Known signatures must exist in a database before conventional
+signature matching can recognize them.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+⚡
+</div>
+
+<h3>
+Reactive Defence
+</h3>
+
+<p>
+
+A threat generally has to be discovered and catalogued before
+a signature-based system can block it.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+⌁
+</div>
+
+<h3>
+Dynamic Evasion
+</h3>
+
+<p>
+
+Small changes to links, scripts, applications or messages
+can be enough to avoid an exact signature match.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ARCHITECTURE
+===================================================== -->
+
+<section id="architecture">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+02 / System architecture
+</div>
+
+
+<h2>
+Intake → Detection → Reporting
+</h2>
+
+
+<p>
+
+PYXIS is organized into loosely coupled layers so individual
+components can evolve independently.
+
+</p>
+
+</div>
+
+
+<div class="arch">
+
+
+<div
+  class="layer"
+  onclick="activate(this)"
+>
+
+<div class="num">
+LAYER 01
+</div>
+
+
+<h3>
+Intake & Interface
+</h3>
+
+
+<p>
+
+Accepts links, messages or application-file information through
+the web interface.
+
+</p>
+
+
+<span class="tag">
+HTML
+</span>
+
+<span class="tag">
+CSS
+</span>
+
+<span class="tag">
+JavaScript
+</span>
+
+</div>
+
+
+<div
+  class="layer"
+  onclick="activate(this)"
+>
+
+<div class="num">
+LAYER 02
+</div>
+
+
+<h3>
+Detection & Analysis
+</h3>
+
+
+<p>
+
+Runs heuristic rules and machine-learning analysis to identify
+known patterns and suspicious variants.
+
+</p>
+
+
+<span class="tag">
+Heuristics
+</span>
+
+<span class="tag">
+ML
+</span>
+
+<span class="tag">
+Python
+</span>
+
+</div>
+
+
+<div
+  class="layer"
+  onclick="activate(this)"
+>
+
+<div class="num">
+LAYER 03
+</div>
+
+
+<h3>
+Reporting
+</h3>
+
+
+<p>
+
+Combines analysis into a risk result with explanations,
+possible scam type and recommended safety actions.
+
+</p>
+
+
+<span class="tag">
+Flask / FastAPI
+</span>
+
+<span class="tag">
+Explanation
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MESSAGE DETECTOR
+===================================================== -->
+
+<section id="detect">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+03 / Interactive demo
+</div>
+
+
+<h2>
+PYXIS threat & scam screening
+</h2>
+
+
+<p>
+
+Paste a suspicious link or message below. PYXIS checks the
+content against demonstration heuristics and identifies
+possible scam patterns.
+
+</p>
+
+</div>
+
+
+<div class="detector">
+
+
+<div>
+
+<textarea
+id="scanInput"
+class="inputbox"
+placeholder="Paste a suspicious link or message here..."
+></textarea>
+
+
+<br>
+
+
+<button
+  class="btn primary"
+  onclick="scan()"
+>
+
+Analyze submission
+
+</button>
+
+
+<button
+  class="btn"
+  onclick="loadExample()"
+>
+
+Load Example
+
+</button>
+
+
+<button
+  class="btn"
+  onclick="nextExample()"
+>
+
+Next Example →
+
+</button>
+
+
+<button
+  class="btn"
+  onclick="clearScan()"
+>
+
+Clear
+
+</button>
+
+
+<div class="example-info">
+
+<strong>
+Example library:
+</strong>
+
+
+<span
+  id="exampleCounter"
+  class="example-counter"
+>
+
+Example 1 of 10
+
+</span>
+
+
+<br>
+
+Click
+<strong>
+Load Example
+</strong>
+to load an example.
+
+Use
+<strong>
+Next Example
+</strong>
+to cycle through all examples.
+
+</div>
+
+</div>
+
+
+<div
+  class="result"
+  id="result"
+>
+
+<div class="status">
+READY
+</div>
+
+
+<p style="color:var(--muted)">
+
+Your PYXIS verdict will appear here.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     NEW FILE SCANNER
+===================================================== -->
+
+<section id="files">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+04 / File scanner
+</div>
+
+
+<h2>
+PYXIS file legitimacy screening
+</h2>
+
+
+<p>
+
+Upload a file or load one of the five demonstration examples.
+PYXIS checks the filename, extension and basic file metadata
+against demonstration security heuristics.
+
+</p>
+
+</div>
+
+
+<div class="file-scanner">
+
+
+<!-- =================================================
+     FILE INPUT PANEL
+================================================= -->
+
+<div class="file-panel">
+
+
+<h3>
+Select a file
+</h3>
+
+
+<div
+  class="file-drop"
+  id="fileDrop"
+>
+
+<div>
+
+<div class="file-icon">
+▣
+</div>
+
+
+<strong>
+Choose or drop a file
+</strong>
+
+
+<p
+  style="color:var(--muted)"
+>
+
+PYXIS will analyze the file name,
+extension and basic browser metadata.
+
+</p>
+
+
+<input
+  type="file"
+  id="realFile"
+  hidden
+  onchange="handleRealFile(this.files[0])"
+>
+
+
+<button
+  class="btn primary"
+  onclick="document.getElementById('realFile').click()"
+>
+
+Choose File
+
+</button>
+
+</div>
+
+</div>
+
+
+<br>
+
+
+<button
+  class="btn primary"
+  onclick="loadFileExample()"
+>
+
+Load File Example
+
+</button>
+
+
+<button
+  class="btn"
+  onclick="nextFileExample()"
+>
+
+Next File Example →
+
+</button>
+
+
+<button
+  class="btn"
+  onclick="clearFileScanner()"
+>
+
+Clear
+
+</button>
+
+
+<div class="file-example-info">
+
+<strong>
+File Example Library:
+</strong>
+
+
+<span
+  id="fileExampleCounter"
+  class="file-example-counter"
+>
+
+Example 1 of 5
+
+</span>
+
+
+<br><br>
+
+The five demonstration cases include
+legitimate-looking documents/archives and
+suspicious executable or script files.
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     FILE RESULT
+================================================= -->
+
+<div
+  class="file-panel file-result"
+  id="fileResult"
+>
+
+<div class="status">
+READY
+</div>
+
+
+<p style="color:var(--muted)">
+
+Select a file or load a demonstration example
+to receive a PYXIS file verdict.
+
+</p>
+
+
+<div class="google-info">
+
+<strong>
+Google verification
+</strong>
+
+
+<p>
+
+After PYXIS identifies a suspicious or unknown file,
+you can search the exact filename on Google to investigate
+the software or sender further.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RESULTS
+===================================================== -->
+
+<section id="results">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+05 / Results
+</div>
+
+
+<h2>
+Combined detection wins
+</h2>
+
+
+<p>
+
+The project report describes the combined rule + ML pipeline
+as having the highest overall catch rate and lowest
+false-negative level in the test sample.
+
+</p>
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+<strong>
+34%
+</strong>
+
+Rule-based only
+
+</div>
+
+
+<div class="stat">
+
+<strong>
+37%
+</strong>
+
+ML classifier only
+
+</div>
+
+
+<div class="stat">
+
+<strong>
+90%
+</strong>
+
+Combined PYXIS
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+
+<div class="barrow">
+
+<b>
+Rule-based
+</b>
+
+
+<div class="bar">
+
+<div
+  class="fill"
+  style="width:34%"
+></div>
+
+</div>
+
+
+<span>
+34%
+</span>
+
+</div>
+
+
+<div class="barrow">
+
+<b>
+ML only
+</b>
+
+
+<div class="bar">
+
+<div
+  class="fill"
+  style="width:37%"
+></div>
+
+</div>
+
+
+<span>
+37%
+</span>
+
+</div>
+
+
+<div class="barrow">
+
+<b>
+Combined
+</b>
+
+
+<div class="bar">
+
+<div
+  class="fill"
+  style="width:90%"
+></div>
+
+</div>
+
+
+<span>
+90%
+</span>
+
+</div>
+
+
+<p>
+
+The presentation reports that the sample set used
+known-malicious URLs from URLhaus and benign URLs
+from the Tranco top-sites list.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     PRICING
+===================================================== -->
+
+<section id="pricing">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+06 / PYXIS Protection
+</div>
+
+
+<h2>
+
+Upgrade to the
+<span class="gradient">
+Full Version
+</span>
+
+</h2>
+
+
+<p>
+
+Experience PYXIS during a two-month free trial before
+purchasing the original full version.
+
+</p>
+
+</div>
+
+
+<div class="pricing-card">
+
+<div class="pricing-grid">
+
+
+<div>
+
+<div class="price">
+Rs. 1,999
+</div>
+
+
+<div class="price-label">
+Original PYXIS Version
+</div>
+
+
+<ul class="benefits">
+
+<li>
+More complete threat-analysis capabilities
+</li>
+
+<li>
+Combined heuristic and ML-based detection
+</li>
+
+<li>
+Detailed threat explanations and reports
+</li>
+
+<li>
+Designed for continuous protection
+</li>
+
+<li>
+Future improvements and feature expansion
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="trial">
+
+<h3>
+2-Month Free Trial
+</h3>
+
+
+<p>
+
+Customers can use PYXIS free of charge for the first
+two months before deciding whether to purchase
+the complete version.
+
+</p>
+
+
+<p>
+
+After the trial period, the complete PYXIS version
+is available for
+<strong>
+Rs. 1,999
+</strong>.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div
+  style="
+    margin-top:30px;
+    border-top:1px solid var(--line);
+    padding-top:25px
+  "
+>
+
+<h3>
+Why is the purchased version better?
+</h3>
+
+
+<p
+  style="
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.8
+  "
+>
+
+The full version is intended to provide a more complete
+cybersecurity experience than the basic demonstration
+or trial environment.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RESEARCH
+===================================================== -->
+
+<section id="research">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+07 / Literature survey
+</div>
+
+
+<h2>
+Five research directions behind PYXIS
+</h2>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+DapAdv
+</h3>
+
+<span class="tag">
+Tang et al.
+</span>
+
+<p>
+
+Black-box adversarial attacks using code-piece insertion.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Go Malware Forensics
+</h3>
+
+<span class="tag">
+Ali, Case & Ahmed
+</span>
+
+<p>
+
+Memory forensics with Volatility 3 extracted evidence
+from Go-based malware.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+AndroMD
+</h3>
+
+<span class="tag">
+Prasad et al.
+</span>
+
+<p>
+
+A large-scale ensemble approach trained on
+600,000+ applications.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+APK Image Detection
+</h3>
+
+<span class="tag">
+Dong, Shu & Huang
+</span>
+
+<p>
+
+Converted APKs to grayscale images and used a
+hybrid CNN-Transformer model.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+FARO-Droid
+</h3>
+
+<span class="tag">
+Yang et al.
+</span>
+
+<p>
+
+Used simulated obfuscation during training to
+improve robustness.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Shared lesson
+</h3>
+
+<span class="tag">
+PYXIS design
+</span>
+
+<p>
+
+No single method is sufficient. PYXIS combines
+complementary detection approaches.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     SAFETY
+===================================================== -->
+
+<section id="safety">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+08 / Field review
+</div>
+
+
+<h2>
+Cybersecurity is also about people.
+</h2>
+
+
+<p>
+
+During the field visit to the Borivali Cyber Crime Cell,
+officers emphasized that many attacks exploit human
+psychology and social engineering.
+
+</p>
+
+</div>
+
+
+<div class="timeline">
+
+
+<div class="item">
+
+<b>
+01
+</b>
+
+<div>
+
+<strong>
+Avoid unknown apps
+</strong>
+
+<br>
+
+<span style="color:var(--muted)">
+
+Avoid sideloading applications from unknown sources.
+
+</span>
+
+</div>
+
+</div>
+
+
+<div class="item">
+
+<b>
+02
+</b>
+
+<div>
+
+<strong>
+Use MFA
+</strong>
+
+<br>
+
+<span style="color:var(--muted)">
+
+Enable multifactor authentication wherever possible.
+
+</span>
+
+</div>
+
+</div>
+
+
+<div class="item">
+
+<b>
+03
+</b>
+
+<div>
+
+<strong>
+Verify suspicious calls
+</strong>
+
+<br>
+
+<span style="color:var(--muted)">
+
+Verify through official channels rather than
+numbers supplied by callers.
+
+</span>
+
+</div>
+
+</div>
+
+
+<div class="item">
+
+<b>
+04
+</b>
+
+<div>
+
+<strong>
+Think before trusting deepfakes
+</strong>
+
+<br>
+
+<span style="color:var(--muted)">
+
+A family safe-word can help verify unusual requests.
+
+</span>
+
+</div>
+
+</div>
+
+
+<div class="item">
+
+<b>
+05
+</b>
+
+<div>
+
+<strong>
+Financial fraud: act quickly
+</strong>
+
+<br>
+
+<span style="color:var(--muted)">
+
+Call 1930 immediately after detecting financial fraud.
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FUTURE
+===================================================== -->
+
+<section>
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+09 / Future scope
+</div>
+
+
+<h2>
+Where PYXIS can go next
+</h2>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+Browser Extension
+</h3>
+
+<p>
+
+Check links before they are opened.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Larger Dataset
+</h3>
+
+<p>
+
+Build a more comprehensive labelled dataset
+to strengthen the ML classifier.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Better Precision
+</h3>
+
+<p>
+
+Reduce false positives and false negatives
+as the training corpus grows.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section>
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+FAQ
+</div>
+
+
+<h2>
+Understand PYXIS in seconds
+</h2>
+
+</div>
+
+
+<details>
+
+<summary>
+What makes PYXIS different?
+</summary>
+
+<p>
+
+It combines rule-based heuristics with machine-learning
+pattern analysis rather than relying on a single detection method.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Can PYXIS detect scam messages?
+</summary>
+
+<p>
+
+The demonstration version can identify common linguistic
+and structural indicators associated with phishing, OTP fraud,
+banking scams, impersonation, prize scams, job scams,
+investment scams and other social-engineering attacks.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Can PYXIS detect suspicious ZIP and EXE files?
+</summary>
+
+<p>
+
+The demonstration can identify suspicious attachment names
+and extensions such as ZIP, EXE, MSI, SCR, BAT and CMD.
+
+This is an educational heuristic check and does not execute
+or scan the file contents.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Can the browser version prove a file is malware?
+</summary>
+
+<p>
+
+No. A browser-only demonstration cannot safely determine whether
+an arbitrary file is truly malicious. PYXIS uses filename,
+extension and metadata heuristics here. A real malware scanner
+would require a backend analysis engine, sandbox or trusted
+malware-analysis service.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+What should I do if PYXIS identifies a suspicious file?
+</summary>
+
+<p>
+
+Do not open or execute it. Verify the sender, search for the
+software through an official source, and scan the file using
+trusted security software before opening it.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+How much does the original PYXIS version cost?
+</summary>
+
+<p>
+
+The original full version is priced at Rs. 1,999.
+
+</p>
+
+</details>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="container">
+
+<div class="logo">
+PYXIS<span>.</span>
+</div>
+
+
+<p>
+
+A Real-Time Malware and Threat Detection System ·
+Field Project ILSEL_PR1 · 2026–27
+
+</p>
+
+
+<p>
+
+Aditya Patel ·
+Ankit Pisharody ·
+Daksh Rahate ·
+Soham Rasal
+
+</p>
+
+</div>
+
+</footer>
+
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
+<script>
+
+
+/* =====================================================
+   ARCHITECTURE CARD ACTIVATION
+===================================================== */
+
+function activate(el){
+
+  document
+    .querySelectorAll(".layer")
+    .forEach(
+      x => x.classList.remove("active")
+    );
+
+  el.classList.add("active");
+
+}
+
+
+/* =====================================================
+   SCAM DATABASE
+===================================================== */
+
+const scamTypes = [
+
+{
+
+name:"Phishing / Credential Theft",
+
+keywords:[
+
+"verify your account",
+"verify account",
+"login",
+"log in",
+"password",
+"username",
+"credentials",
+"account verification",
+"confirm your account",
+"security verification"
+
+],
+
+advice:
+"Do not click the link or enter your username, password or other credentials. Open the organisation's official website manually and check your account there.",
+
+avoid:
+"Never enter your password on a page reached through a suspicious message."
+
+},
+
+
+{
+
+name:"OTP / Banking Scam",
+
+keywords:[
+
+"otp",
+"one time password",
+"one-time password",
+"cvv",
+"pin",
+"bank account",
+"banking",
+"transaction",
+"upi",
+"upi pin",
+"debit card",
+"credit card",
+"bank account blocked",
+"account will be blocked"
+
+],
+
+advice:
+"Do not share your OTP, PIN, CVV or banking credentials. Contact your bank using the official number or banking application.",
+
+avoid:
+"Banks and legitimate services should not require you to reveal an OTP, PIN or CVV to a caller or stranger."
+
+},
+
+
+{
+
+name:"Prize / Lottery Scam",
+
+keywords:[
+
+"you won",
+"you have won",
+"winner",
+"lottery",
+"prize",
+"cash prize",
+"free prize",
+"claim your prize",
+"congratulations",
+"gift voucher",
+"reward",
+"₹",
+"rs.",
+"rupees"
+
+],
+
+advice:
+"Do not pay a processing fee or provide banking information to claim an unexpected prize. Verify the promotion through the organisation's official website.",
+
+avoid:
+"Unexpected prizes that require upfront payments are a major warning sign."
+
+},
+
+
+{
+
+name:"Job / Recruitment Scam",
+
+keywords:[
+
+"work from home",
+"work-from-home",
+"job offer",
+"job opportunity",
+"hiring",
+"salary",
+"registration fee",
+"joining fee",
+"processing fee",
+"employment",
+"part time job",
+"part-time job",
+"earn money",
+"vacancy"
+
+],
+
+advice:
+"Verify the company and job through its official website or verified recruitment channel. Never pay money simply to receive a job offer.",
+
+avoid:
+"Do not send registration fees, deposits or identity documents to unverified recruiters."
+
+},
+
+
+{
+
+name:"Investment / Cryptocurrency Scam",
+
+keywords:[
+
+"investment",
+"invest now",
+"guaranteed return",
+"guaranteed profit",
+"double your money",
+"crypto",
+"cryptocurrency",
+"bitcoin",
+"trading profit",
+"stock tips",
+"forex",
+"passive income",
+"high return",
+"quick profit"
+
+],
+
+advice:
+"Do not transfer money based on guaranteed-profit promises. Verify investment platforms through trusted official sources before investing.",
+
+avoid:
+"Guaranteed high returns and pressure to invest immediately are strong scam indicators."
+
+},
+
+
+{
+
+name:"Impersonation Scam",
+
+keywords:[
+
+"i am your manager",
+"i am your boss",
+"this is your boss",
+"i am from police",
+"police officer",
+"government officer",
+"customs officer",
+"income tax",
+"your relative",
+"this is me",
+"official notice",
+"government notice"
+
+],
+
+advice:
+"Verify the person's identity independently. Contact the supposed organisation, manager or family member using a known official number.",
+
+avoid:
+"Do not trust caller ID, profile photos or claims of authority as proof of identity."
+
+},
+
+
+{
+
+name:"Digital Arrest / Police Scam",
+
+keywords:[
+
+"digital arrest",
+"arrest warrant",
+"warrant",
+"police case",
+"cyber crime case",
+"legal action",
+"criminal case",
+"court case",
+"arrest",
+"police verification"
+
+],
+
+advice:
+"Stay calm and end the call. Police and government authorities do not conduct a 'digital arrest' over video calls. Verify any legal claim independently.",
+
+avoid:
+"Do not transfer money because someone threatens arrest or legal action through a phone or video call."
+
+},
+
+
+{
+
+name:"Tech Support Scam",
+
+keywords:[
+
+"virus detected",
+"computer infected",
+"device infected",
+"technical support",
+"tech support",
+"call support",
+"microsoft support",
+"security alert",
+"remote access",
+"remote desktop",
+"anydesk",
+"teamviewer"
+
+],
+
+advice:
+"Do not install remote-access software or give strangers control of your computer. Contact the software or device manufacturer through its official support channel.",
+
+avoid:
+"Never give an unknown person remote access to your device."
+
+},
+
+
+{
+
+name:"Delivery / Parcel Scam",
+
+keywords:[
+
+"parcel",
+"package",
+"delivery",
+"courier",
+"customs",
+"delivery failed",
+"delivery attempt",
+"shipping",
+"package held",
+"address confirmation"
+
+],
+
+advice:
+"Check delivery information directly through the official courier or shopping application's website. Do not use payment links supplied by unexpected messages.",
+
+avoid:
+"Do not pay small delivery fees through unfamiliar links."
+
+},
+
+
+{
+
+name:"Urgency / Social Engineering",
+
+keywords:[
+
+"urgent",
+"immediately",
+"act now",
+"within 24 hours",
+"last warning",
+"final warning",
+"account suspended",
+"account will be closed",
+"respond immediately",
+"do this now",
+"don't tell anyone",
+"keep this secret"
+
+],
+
+advice:
+"Pause before responding. Verify the request through a separate trusted channel rather than following the instructions in the message.",
+
+avoid:
+"Scammers often create urgency so victims do not have time to verify the story."
+
+}
+
+];
+
+
+/* =====================================================
+   FILE DATABASE
+===================================================== */
+
+const fileTypes = [
+
+{
+
+extensions:[
+".exe",
+".scr",
+".com"
+],
+
+name:
+"Executable / Potential Malware Attachment",
+
+risk:80,
+
+advice:
+"Do not open or execute the file. Verify the sender independently and scan the file using trusted security software before opening it.",
+
+warning:
+"Executable files can run programs on your computer and should not be opened when received unexpectedly."
+
+},
+
+
+{
+
+extensions:[
+".msi"
+],
+
+name:
+"Windows Installer / Potential Malware Delivery",
+
+risk:75,
+
+advice:
+"Do not install an unexpected MSI package. Verify the publisher and obtain software from the vendor's official website.",
+
+warning:
+"MSI files can install software on Windows and should be treated carefully when received unexpectedly."
+
+},
+
+
+{
+
+extensions:[
+".bat",
+".cmd"
+],
+
+name:
+"Command Script / Potentially Dangerous Attachment",
+
+risk:85,
+
+advice:
+"Do not run an unexpected BAT or CMD file. These files can execute system commands.",
+
+warning:
+"Command scripts can execute instructions directly on a computer."
+
+},
+
+
+{
+
+extensions:[
+".js",
+".vbs",
+".ps1"
+],
+
+name:
+"Script Attachment / Potentially Dangerous File",
+
+risk:80,
+
+advice:
+"Do not execute an unexpected script file. Verify its source and scan it using trusted security software.",
+
+warning:
+"Script files can execute commands or download additional content when opened."
+
+},
+
+
+{
+
+extensions:[
+".zip",
+".rar",
+".7z"
+],
+
+name:
+"Compressed Archive",
+
+risk:45,
+
+advice:
+"Compressed files are not automatically malicious. Verify the sender and scan the archive before extracting it.",
+
+warning:
+"Archives can contain executable or malicious files. Treat unexpected archives carefully."
+
+},
+
+
+{
+
+extensions:[
+".pdf"
+],
+
+name:
+"PDF Document",
+
+risk:15,
+
+advice:
+"PDF files are commonly legitimate documents, but unexpected PDFs can still contain malicious links or exploit attempts. Open only from trusted sources.",
+
+warning:
+"A PDF extension alone does not prove that the document is safe."
+
+},
+
+
+{
+
+extensions:[
+".docx",
+".xlsx",
+".pptx"
+],
+
+name:
+"Office Document",
+
+risk:15,
+
+advice:
+"Verify the sender before opening unexpected Office documents. Keep Office software updated.",
+
+warning:
+"Documents can contain malicious links or social-engineering content."
+
+},
+
+
+{
+
+extensions:[
+".jpg",
+".jpeg",
+".png",
+".gif"
+],
+
+name:
+"Image File",
+
+risk:5,
+
+advice:
+"This is a common image format. Still verify unexpected attachments and keep your software updated.",
+
+warning:
+"File extensions alone cannot prove that a file is safe."
+
+}
+
+];
+
+
+/* =====================================================
+   FIVE FILE EXAMPLES
+===================================================== */
+
+const fileExamples = [
+
+{
+
+name:
+"Company_Report.zip",
+
+size:
+"2.4 MB",
+
+type:
+"ZIP archive",
+
+description:
+"Example of a normal-looking company report archive.",
+
+risk:
+45,
+
+category:
+"archive",
+
+message:
+"This archive is not automatically malicious. PYXIS recommends verifying the sender and scanning the archive before extraction."
+
+},
+
+
+{
+
+name:
+"WindowsSecurityUpdate.exe",
+
+size:
+"18.7 MB",
+
+type:
+"Windows executable",
+
+description:
+"Suspicious executable pretending to be a security update.",
+
+risk:
+95,
+
+category:
+"danger",
+
+message:
+"Unexpected executable files should not be launched. Verify the publisher and download security software only from official sources."
+
+},
+
+
+{
+
+name:
+"Invoice_2026.zip",
+
+size:
+"1.8 MB",
+
+type:
+"ZIP archive",
+
+description:
+"Archive received unexpectedly with an invoice-themed name.",
+
+risk:
+65,
+
+category:
+"suspicious",
+
+message:
+"Invoice-themed archives can be used to deliver malicious files. Verify the sender before opening or extracting the archive."
+
+},
+
+
+{
+
+name:
+"Annual_Report.pdf",
+
+size:
+"740 KB",
+
+type:
+"PDF document",
+
+description:
+"Normal-looking PDF document.",
+
+risk:
+10,
+
+category:
+"safe",
+
+message:
+"This file type is commonly legitimate, but the sender and document source should still be verified."
+
+},
+
+
+{
+
+name:
+"EmployeeRegistration.bat",
+
+size:
+"12 KB",
+
+type:
+"Windows command script",
+
+description:
+"Command script pretending to be an employee registration file.",
+
+risk:
+98,
+
+category:
+"danger",
+
+message:
+"Do not execute this script. BAT files can execute system commands on Windows."
+
+}
+
+];
+
+
+let exampleIndex = 0;
+
+let fileExampleIndex = 0;
+
+let currentFileName = "";
+
+
+/* =====================================================
+   MESSAGE EXAMPLE COUNTER
+===================================================== */
+
+function updateExampleCounter(){
+
+  const counter =
+    document.getElementById(
+      "exampleCounter"
+    );
+
+  if(counter){
+
+    counter.textContent =
+      "Example " +
+      (exampleIndex + 1) +
+      " of " +
+      examples.length;
+
+  }
+
+}
+
+
+/* =====================================================
+   MESSAGE EXAMPLES
+===================================================== */
+
+const examples = [
+
+{
+
+title:"Bank / OTP Scam",
+
+text:
+`URGENT!
+
+Your bank account will be blocked today.
+
+For security verification, send us your OTP and UPI PIN immediately.
+
+Click here to verify your account:
+https://bit.ly/verify-account`
+
+},
+
+
+{
+
+title:"Prize / Lottery Scam",
+
+text:
+`CONGRATULATIONS!
+
+You have won ₹50,000 in our special customer reward lottery.
+
+To claim your prize, click the link below and pay a small processing fee.
+
+Claim your prize now:
+https://example.com/prize-claim`
+
+},
+
+
+{
+
+title:"Fake Job Scam",
+
+text:
+`WORK FROM HOME JOB OFFER
+
+Congratulations! Your profile has been selected.
+
+You can earn ₹45,000 per month working from home.
+
+Pay a ₹2,000 registration fee today to confirm your employment.
+
+Act now to secure your vacancy.`
+
+},
+
+
+{
+
+title:"Investment Scam",
+
+text:
+`INVESTMENT OPPORTUNITY
+
+Invest only ₹5,000 today and receive guaranteed profits of ₹50,000.
+
+Our crypto trading system provides guaranteed returns with zero risk.
+
+Invest now before this opportunity closes.`
+
+},
+
+
+{
+
+title:"Digital Arrest Scam",
+
+text:
+`OFFICIAL POLICE NOTICE
+
+This is a cyber crime case against you.
+
+An arrest warrant has been issued.
+
+You are under digital arrest and must remain on this video call.
+
+Transfer the required amount immediately to avoid legal action.`
+
+},
+
+
+{
+
+title:"Malicious ZIP Attachment",
+
+text:
+`IMPORTANT INVOICE
+
+Your latest invoice is attached as:
+
+Invoice_2026.zip
+
+Please download and extract the ZIP file immediately to avoid account suspension.`
+
+},
+
+
+{
+
+title:"Suspicious EXE Attachment",
+
+text:
+`SECURITY UPDATE REQUIRED
+
+Your computer has been identified as vulnerable.
+
+Download and run the attached file:
+
+WindowsSecurityUpdate.exe`
+
+},
+
+
+{
+
+title:"Fake Delivery ZIP",
+
+text:
+`DELIVERY NOTICE
+
+Your parcel could not be delivered.
+
+Please open:
+
+DeliveryConfirmation.zip`
+
+},
+
+
+{
+
+title:"Fake Job EXE",
+
+text:
+`HR DEPARTMENT
+
+You have been selected for our work-from-home position.
+
+Please open:
+
+EmployeeRegistration.exe
+
+Complete the registration and pay the joining fee.`
+
+},
+
+
+{
+
+title:"Fake Microsoft MSI Update",
+
+text:
+`IMPORTANT SECURITY ALERT
+
+Microsoft Support has detected a virus on your computer.
+
+Download and install:
+
+MicrosoftSecurityUpdate.msi`
+
+}
+
+];
+
+
+/* =====================================================
+   LOAD MESSAGE EXAMPLE
+===================================================== */
+
+function loadExample(){
+
+  const example =
+    examples[exampleIndex];
+
+  document.getElementById(
+    "scanInput"
+  ).value = example.text;
+
+  updateExampleCounter();
+
+  scan();
+
+  show(
+    "Loaded: " + example.title
+  );
+
+}
+
+
+/* =====================================================
+   NEXT MESSAGE EXAMPLE
+===================================================== */
+
+function nextExample(){
+
+  exampleIndex++;
+
+  if(
+    exampleIndex >=
+    examples.length
+  ){
+
+    exampleIndex = 0;
+
+  }
+
+  loadExample();
+
+}
+
+
+/* =====================================================
+   MESSAGE URL DETECTION
+===================================================== */
+
+function detectURLPatterns(text){
+
+  const reasons = [];
+
+  if(
+    /bit\.ly|tinyurl|t\.co|shorturl|goo\.gl|cutt\.ly/i
+    .test(text)
+  ){
+
+    reasons.push(
+      "Shortened-link pattern detected"
+    );
+
+  }
+
+
+  if(
+    /https?:\/\/[^\s]+/i
+    .test(text)
+  ){
+
+    reasons.push(
+      "External URL detected"
+    );
+
+  }
+
+
+  return reasons;
+
+}
+
+
+/* =====================================================
+   SCAM DETECTION
+===================================================== */
+
+function detectScams(text){
+
+  const lower =
+    text.toLowerCase();
+
+  const detected = [];
+
+  scamTypes.forEach(
+    scam => {
+
+      const matches = [];
+
+      scam.keywords.forEach(
+        keyword => {
+
+          if(
+            lower.includes(
+              keyword.toLowerCase()
+            )
+          ){
+
+            matches.push(keyword);
+
+          }
+
+        }
+      );
+
+
+      if(
+        matches.length > 0
+      ){
+
+        detected.push({
+          scam,
+          matches
+        });
+
+      }
+
+    }
+  );
+
+  return detected;
+
+}
+
+
+/* =====================================================
+   MAIN MESSAGE SCANNER
+===================================================== */
+
+function scan(){
+
+  const input =
+    document.getElementById(
+      "scanInput"
+    ).value.trim();
+
+  const box =
+    document.getElementById(
+      "result"
+    );
+
+
+  if(!input){
+
+    show(
+      "Please enter a message or link."
+    );
+
+    return;
+
+  }
+
+
+  const urlReasons =
+    detectURLPatterns(input);
+
+  const detectedScams =
+    detectScams(input);
+
+
+  if(
+    detectedScams.length === 0 &&
+    urlReasons.length === 0
+  ){
+
+    box.innerHTML = `
+
+      <div class="status safe">
+        LOW RISK
+      </div>
+
+      <p>
+        No known scam or suspicious-link
+        patterns were triggered.
+      </p>
+
+      <div class="advice-box">
+
+        <strong>
+          Safety advice
+        </strong>
+
+        <p style="color:var(--muted)">
+          A clean result does not prove that
+          a message is safe.
+        </p>
+
+      </div>
+
+      <small>
+        Demo heuristic verdict.
+      </small>
+
+    `;
+
+    return;
+
+  }
+
+
+  let riskScore = 0;
+
+
+  riskScore +=
+    detectedScams.length * 20;
+
+
+  riskScore +=
+    urlReasons.length * 10;
+
+
+  if(
+    /urgent|immediately|act now|final warning/i
+    .test(input)
+  ){
+
+    riskScore += 20;
+
+  }
+
+
+  if(
+    /otp|password|pin|cvv|upi|bank/i
+    .test(input)
+  ){
+
+    riskScore += 20;
+
+  }
+
+
+  riskScore =
+    Math.min(
+      riskScore,
+      100
+    );
+
+
+  let riskClass =
+    "suspicious";
+
+  let riskText =
+    "SUSPICIOUS";
+
+
+  if(
+    riskScore >= 70
+  ){
+
+    riskClass =
+      "malicious";
+
+    riskText =
+      "HIGH RISK / LIKELY THREAT";
+
+  }
+
+
+  let reasonsHTML = "";
+
+
+  if(
+    urlReasons.length > 0
+  ){
+
+    reasonsHTML += `
+
+      <div class="scam-result">
+
+        <div class="scam-type">
+          Link Analysis
+        </div>
+
+        <ul>
+
+          ${urlReasons
+            .map(
+              reason =>
+              `<li>${reason}</li>`
+            )
+            .join("")}
+
+        </ul>
+
+      </div>
+
+    `;
+
+  }
+
+
+  detectedScams.forEach(
+    item => {
+
+      reasonsHTML += `
+
+        <div class="scam-result">
+
+          <div class="scam-type">
+
+            Possible Scam Type:
+            ${item.scam.name}
+
+          </div>
+
+          <p>
+            <strong>
+              Detected indicators:
+            </strong>
+          </p>
+
+          <ul>
+
+            ${item.matches
+              .map(
+                match =>
+                `<li>"${match}"</li>`
+              )
+              .join("")}
+
+          </ul>
+
+
+          <div class="advice-box">
+
+            <strong>
+              How to tackle it
+            </strong>
+
+            <p style="color:var(--muted)">
+              ${item.scam.advice}
+            </p>
+
+          </div>
+
+
+          <div class="warning-box">
+
+            <strong>
+              Do NOT do this
+            </strong>
+
+            <p style="color:var(--muted)">
+              ${item.scam.avoid}
+            </p>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  box.innerHTML = `
+
+    <div class="status ${riskClass}">
+      ${riskText}
+    </div>
+
+    <p>
+
+      <strong>
+        PYXIS Risk Score:
+      </strong>
+
+      ${riskScore}/100
+
+    </p>
+
+    ${reasonsHTML}
+
+    <br>
+
+    <small>
+      Demo heuristic verdict — not a real malware scanner.
+    </small>
+
+  `;
+
+}
+
+
+/* =====================================================
+   CLEAR MESSAGE SCANNER
+===================================================== */
+
+function clearScan(){
+
+  document.getElementById(
+    "scanInput"
+  ).value = "";
+
+
+  document.getElementById(
+    "result"
+  ).innerHTML = `
+
+    <div class="status">
+      READY
+    </div>
+
+    <p style="color:var(--muted)">
+      Your PYXIS verdict will appear here.
+    </p>
+
+  `;
+
+}
+
+
+/* =====================================================
+   FILE EXAMPLE COUNTER
+===================================================== */
+
+function updateFileExampleCounter(){
+
+  const counter =
+    document.getElementById(
+      "fileExampleCounter"
+    );
+
+  counter.textContent =
+    "Example " +
+    (fileExampleIndex + 1) +
+    " of " +
+    fileExamples.length +
+    " — " +
+    fileExamples[
+      fileExampleIndex
+    ].name;
+
+}
+
+
+/* =====================================================
+   LOAD FILE EXAMPLE
+===================================================== */
+
+function loadFileExample(){
+
+  const example =
+    fileExamples[
+      fileExampleIndex
+    ];
+
+  currentFileName =
+    example.name;
+
+
+  displayFileResult(
+    example.name,
+    example.size,
+    example.type,
+    example.risk,
+    example.description,
+    example.message,
+    true
+  );
+
+
+  updateFileExampleCounter();
+
+
+  show(
+    "Loaded file example: " +
+    example.name
+  );
+
+}
+
+
+/* =====================================================
+   NEXT FILE EXAMPLE
+===================================================== */
+
+function nextFileExample(){
+
+  fileExampleIndex++;
+
+
+  if(
+    fileExampleIndex >=
+    fileExamples.length
+  ){
+
+    fileExampleIndex = 0;
+
+  }
+
+
+  loadFileExample();
+
+}
+
+
+/* =====================================================
+   FILE EXTENSION
+===================================================== */
+
+function getExtension(filename){
+
+  const index =
+    filename.lastIndexOf(".");
+
+  if(index === -1){
+
+    return "";
+
+  }
+
+  return filename
+    .slice(index)
+    .toLowerCase();
+
+}
+
+
+/* =====================================================
+   FORMAT FILE SIZE
+===================================================== */
+
+function formatBytes(bytes){
+
+  if(!bytes){
+
+    return "Unknown size";
+
+  }
+
+
+  const units = [
+    "B",
+    "KB",
+    "MB",
+    "GB"
+  ];
+
+
+  let i = 0;
+
+  let size = bytes;
+
+
+  while(
+    size >= 1024 &&
+    i < units.length - 1
+  ){
+
+    size /= 1024;
+
+    i++;
+
+  }
+
+
+  return (
+    size.toFixed(
+      size < 10 && i > 0
+      ? 1
+      : 0
+    )
+    +
+    " "
+    +
+    units[i]
+  );
+
+}
+
+
+/* =====================================================
+   DETERMINE FILE RISK
+===================================================== */
+
+function analyzeFile(
+  filename,
+  size,
+  mime
+){
+
+  const extension =
+    getExtension(filename);
+
+
+  let matchedType = null;
+
+
+  fileTypes.forEach(
+    type => {
+
+      if(
+        type.extensions
+          .includes(extension)
+      ){
+
+        matchedType = type;
+
+      }
+
+    }
+  );
+
+
+  let risk = 35;
+
+  let description =
+    "Unknown file type.";
+
+  let message =
+    "Verify the sender and scan this file using trusted security software before opening it.";
+
+
+  if(matchedType){
+
+    risk =
+      matchedType.risk;
+
+    description =
+      matchedType.name;
+
+    message =
+      matchedType.advice;
+
+  }
+
+
+  /*
+     Additional filename heuristics
+  */
+
+  const lower =
+    filename.toLowerCase();
+
+
+  if(
+    /crack|keygen|patch|hack|activator|free_license/
+    .test(lower)
+  ){
+
+    risk += 30;
+
+  }
+
+
+  if(
+    /update|invoice|payment|security|delivery|refund/
+    .test(lower)
+  ){
+
+    risk += 10;
+
+  }
+
+
+  if(
+    extension === ".pdf" &&
+    risk < 30
+  ){
+
+    risk = 10;
+
+  }
+
+
+  if(
+    extension === ".jpg" ||
+    extension === ".jpeg" ||
+    extension === ".png"
+  ){
+
+    risk = 5;
+
+  }
+
+
+  risk =
+    Math.min(
+      risk,
+      100
+    );
+
+
+  return {
+
+    risk,
+    description,
+    message,
+    extension,
+    mime,
+    size
+
+  };
+
+}
+
+
+/* =====================================================
+   HANDLE REAL FILE
+===================================================== */
+
+function handleRealFile(file){
+
+  if(!file){
+
+    return;
+
+  }
+
+
+  currentFileName =
+    file.name;
+
+
+  const analysis =
+    analyzeFile(
+      file.name,
+      file.size,
+      file.type
+    );
+
+
+  displayFileResult(
+    file.name,
+    formatBytes(file.size),
+    file.type ||
+      "Unknown file type",
+    analysis.risk,
+    analysis.description,
+    analysis.message,
+    false
+  );
+
+
+  show(
+    "File loaded: " +
+    file.name
+  );
+
+}
+
+
+/* =====================================================
+   DISPLAY FILE RESULT
+===================================================== */
+
+function displayFileResult(
+  filename,
+  size,
+  type,
+  risk,
+  description,
+  message,
+  demo
+){
+
+  const box =
+    document.getElementById(
+      "fileResult"
+    );
+
+
+  let verdict = "";
+  let verdictClass = "";
+  let scoreClass = "";
+  let extraHTML = "";
+
+
+  if(risk >= 75){
+
+    verdict =
+      "HIGH RISK";
+
+    verdictClass =
+      "file-danger";
+
+    scoreClass =
+      "score-red";
+
+
+    extraHTML = `
+
+      <div class="file-warning">
+
+        <strong>
+          ⚠ PYXIS warning
+        </strong>
+
+        <p style="color:var(--muted)">
+
+          This file matches characteristics commonly
+          associated with dangerous or executable files.
+
+          Do not open or execute it until it has been
+          independently verified.
+
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  else if(risk >= 40){
+
+    verdict =
+      "SUSPICIOUS";
+
+    verdictClass =
+      "file-suspicious";
+
+    scoreClass =
+      "score-yellow";
+
+
+    extraHTML = `
+
+      <div class="file-warning">
+
+        <strong>
+          ⚠ Proceed carefully
+        </strong>
+
+        <p style="color:var(--muted)">
+
+          The file has characteristics that deserve
+          additional verification before opening.
+
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  else{
+
+    verdict =
+      "LEGITIMATE-LOOKING";
+
+    verdictClass =
+      "file-legit";
+
+    scoreClass =
+      "score-green";
+
+
+    extraHTML = `
+
+      <div class="file-advice">
+
+        <strong>
+          ✓ Lower-risk file type
+        </strong>
+
+        <p style="color:var(--muted)">
+
+          PYXIS did not identify strong warning signs
+          from the file name and type.
+
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  box.innerHTML = `
+
+    <div class="file-verdict ${verdictClass}">
+      ${verdict}
+    </div>
+
+
+    <p style="color:var(--muted)">
+      PYXIS file-analysis result
+    </p>
+
+
+    <div
+      style="
+        border-top:1px solid var(--line);
+        padding-top:18px;
+        margin-top:18px
+      "
+    >
+
+      <p>
+
+        <strong>
+          File:
+        </strong>
+
+        <span class="file-name">
+          ${escapeHTML(filename)}
+        </span>
+
+      </p>
+
+
+      <p>
+
+        <strong>
+          Type:
+        </strong>
+
+        ${escapeHTML(type || "Unknown")}
+
+      </p>
+
+
+      <p>
+
+        <strong>
+          Size:
+        </strong>
+
+        ${escapeHTML(size || "Unknown")}
+
+      </p>
+
+
+      <p>
+
+        <strong>
+          Analysis:
+        </strong>
+
+        ${escapeHTML(description)}
+
+      </p>
+
+    </div>
+
+
+    <div class="file-score">
+
+      <strong>
+        PYXIS Risk Score:
+      </strong>
+
+      ${risk}/100
+
+
+      <div
+        class="score-bar"
+        style="margin-top:8px"
+      >
+
+        <div
+          class="score-fill ${scoreClass}"
+          style="width:${risk}%"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    ${extraHTML}
+
+
+    <div class="file-advice">
+
+      <strong>
+        Recommended action
+      </strong>
+
+      <p style="color:var(--muted)">
+
+        ${escapeHTML(message)}
+
+      </p>
+
+    </div>
+
+
+    <button
+      class="btn google"
+      onclick="searchFileOnGoogle()"
+    >
+
+      🔎 Search this file on Google
+
+    </button>
+
+
+    <div class="google-info">
+
+      <strong>
+        Important:
+      </strong>
+
+      Google search is only for researching the filename,
+      software name or publisher. It does not scan the file
+      for malware.
+
+    </div>
+
+
+    ${
+      demo
+      ?
+      `
+      <small
+        style="
+          display:block;
+          margin-top:15px;
+          color:var(--muted)
+        "
+      >
+        Demonstration file example — no actual file
+        has been uploaded or executed.
+      </small>
+      `
+      :
+      `
+      <small
+        style="
+          display:block;
+          margin-top:15px;
+          color:var(--muted)
+        "
+      >
+        Browser-based heuristic analysis. The actual
+        file contents were not executed or uploaded.
+      </small>
+      `
+    }
+
+  `;
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   GOOGLE SEARCH
+===================================================== */
+
+function searchFileOnGoogle(){
+
+  if(!currentFileName){
+
+    show(
+      "Load or select a file first."
+    );
+
+    return;
+
+  }
+
+
+  const query =
+    encodeURIComponent(
+      `"${currentFileName}" malware OR legitimate OR virus`
+    );
+
+
+  const googleURL =
+    "https://www.google.com/search?q=" +
+    query;
+
+
+  window.open(
+    googleURL,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+
+/* =====================================================
+   CLEAR FILE SCANNER
+===================================================== */
+
+function clearFileScanner(){
+
+  currentFileName = "";
+
+
+  document.getElementById(
+    "realFile"
+  ).value = "";
+
+
+  document.getElementById(
+    "fileResult"
+  ).innerHTML = `
+
+    <div class="status">
+      READY
+    </div>
+
+    <p style="color:var(--muted)">
+
+      Select a file or load a demonstration
+      example to receive a PYXIS verdict.
+
+    </p>
+
+    <div class="google-info">
+
+      <strong>
+        Google verification
+      </strong>
+
+      <p>
+
+        After PYXIS identifies a suspicious or unknown
+        file, you can search the exact filename on Google.
+
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   DRAG & DROP
+===================================================== */
+
+const fileDrop =
+  document.getElementById(
+    "fileDrop"
+  );
+
+
+fileDrop.addEventListener(
+  "dragover",
+  function(event){
+
+    event.preventDefault();
+
+    fileDrop.classList.add(
+      "dragging"
+    );
+
+  }
+);
+
+
+fileDrop.addEventListener(
+  "dragleave",
+  function(){
+
+    fileDrop.classList.remove(
+      "dragging"
+    );
+
+  }
+);
+
+
+fileDrop.addEventListener(
+  "drop",
+  function(event){
+
+    event.preventDefault();
+
+    fileDrop.classList.remove(
+      "dragging"
+    );
+
+
+    const file =
+      event.dataTransfer.files[0];
+
+
+    handleRealFile(file);
+
+  }
+);
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function show(msg){
+
+  const t =
+    document.getElementById(
+      "toast"
+    );
+
+
+  t.textContent =
+    msg;
+
+
+  t.classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    () =>
+      t.classList.remove(
+        "show"
+      ),
+    2400
+  );
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+updateExampleCounter();
+
+updateFileExampleCounter();
+
+</script>
+
+</body>
+
+</html>
